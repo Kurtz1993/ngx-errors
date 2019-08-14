@@ -8,6 +8,8 @@
 
 This work is based on [Ultimate Angular's ngx-errors.](https://github.com/UltimateAngular/ngx-errors)
 
+<h2>This package requires RxJS >=6</h2>
+
 <div align="center" markdown="1">
 <a href="#installation">Installation</a> |
 <a href="#setup">Setup</a> |
