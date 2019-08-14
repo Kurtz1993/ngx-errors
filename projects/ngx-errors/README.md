@@ -29,7 +29,7 @@ Typically you'd do something like this:
 
 ```html
 <!-- without ngxErrors -->
-<input type="text" formControlName="foo">
+<input type="text" formControlName="foo" />
 
 <div *ngIf="form.get('foo').hasError('required') && form.get('foo').touched">
   Field is required
@@ -43,7 +43,7 @@ With ngxErrors, we've taken a simple declarative approach that cleans up your te
 
 ```html
 <!-- with ngxErrors -->
-<input type="text" formControlName="foo">
+<input type="text" formControlName="foo" />
 
 <div ngxErrors="foo">
   <div ngxError="required" when="touched">
@@ -84,7 +84,7 @@ import { NgxErrorsModule } from '@kurtz1993/ngx-errors';
 The `ngxErrors` directive works by dynamically fetching your FormControl under-the-hood, so simply take your `formControlName` value and pass it into `ngxErrors`:
 
 ```html
-<input type="text" formControlName="username">
+<input type="text" formControlName="username" />
 <div ngxErrors="username">
   <!-- ... -->
 </div>
@@ -97,7 +97,7 @@ This needs to be on a parent container that will encapsulate child `ngxError` di
 The `ngxError` directive takes either a `string` or `array` as arguments. The argument you pass in corresponds to any active errors exposed on your control, such as "required" or "minlength":
 
 ```html
-<input type="text" formControlName="username">
+<input type="text" formControlName="username" />
 <div ngxErrors="username">
   <div ngxError="minlength">
     Min length is 5
@@ -110,7 +110,7 @@ The `ngxError` directive takes either a `string` or `array` as arguments. The ar
 Using the array syntax, when any condition in the array is true the error will be shown:
 
 ```html
-<input type="text" formControlName="username">
+<input type="text" formControlName="username" />
 <div ngxErrors="username">
   <div [ngxError]="['minlength', 'maxlength']">
     Min length is 5, max length is 10
@@ -123,7 +123,7 @@ Using the array syntax, when any condition in the array is true the error will b
 The `when` directive takes either a `string` or `array` as arguments. It allows you to specify when you wish to display the error based on the control state, such as "dirty" or "touched":
 
 ```html
-<input type="text" formControlName="username">
+<input type="text" formControlName="username" />
 <div ngxErrors="username">
   <div ngxError="minlength" when="dirty">
     Min length is 5
@@ -134,7 +134,7 @@ The `when` directive takes either a `string` or `array` as arguments. It allows 
 It also comes in array format for multiple rules:
 
 ```html
-<input type="text" formControlName="username">
+<input type="text" formControlName="username" />
 <div ngxErrors="username">
   <div ngxError="minlength" [when]="['dirty', 'touched']">
     Min length is 5
@@ -147,7 +147,7 @@ It also comes in array format for multiple rules:
 You can optionally data-bind and dynamically create validation errors with ngxErrors:
 
 ```html
-<input type="text" formControlName="username">
+<input type="text" formControlName="username" />
 <div ngxErrors="person.username">
   <div *ngFor="let error of errors" [ngxError]="error.name" [when]="error.rules">
     {{ error.text }}
@@ -173,7 +173,7 @@ ngxErrors also supports FormGroups with control names using dot notation:
 
 ```html
 <div formGroupName="person">
-  <input type="text" formControlName="username">
+  <input type="text" formControlName="username" />
   <div ngxErrors="person.username">
     <div ngxError="minlength" [when]="['dirty', 'touched']">
       Min length is 5
@@ -199,7 +199,7 @@ The `getError` method returns the object associated with your error. This can be
 > Example: Adds `Min length is 5` when value is less than 5 characters (based on `Validators.minLength(5)`).
 
 ```html
-<input type="text" formControlName="username">
+<input type="text" formControlName="username" />
 
 <div ngxErrors="username" #myError="ngxErrors">
   <div ngxError="minlength" when="dirty">
@@ -218,7 +218,7 @@ The `hasError` method informs you if your control has the given error. This can 
 
 ```html
 <div [class.required]="myError.hasError('required')">
-  <input type="text" formControlName="username">
+  <input type="text" formControlName="username" />
 </div>
 
 <div ngxErrors="username" #myError="ngxErrors">
@@ -234,7 +234,7 @@ You can optionally pass in conditions in which to activate the error.
 
 ```html
 <div [class.required]="myError.hasError('required', ['dirty', 'touched'])">
-  <input type="text" formControlName="username">
+  <input type="text" formControlName="username" />
 </div>
 
 <div ngxErrors="username" #myError="ngxErrors">
@@ -248,12 +248,13 @@ You can also use the "catch-all" selector to get the state of your entire contro
 
 ```html
 <div>
-  <div [ngClass]="{
+  <div
+    [ngClass]="{
     invalid: myError.hasError('*'),
     invalidTouchedDirty: myError.hasError('*', ['touched', 'dirty'])
-  }">
-  </div>
-  <input type="text" formControlName="username">
+  }"
+  ></div>
+  <input type="text" formControlName="username" />
 </div>
 
 <div ngxErrors="username" #myError="ngxErrors">
@@ -271,7 +272,7 @@ The `isValid` method informs you if a your control is valid, or a property is va
 
 ```html
 <div [class.valid]="myError.isValid('required')">
-  <input type="text" formControlName="username">
+  <input type="text" formControlName="username" />
 </div>
 
 <div ngxErrors="username" #myError="ngxErrors">
@@ -287,7 +288,7 @@ You can optionally pass in conditions in which to evaluate alongside the propert
 
 ```html
 <div [class.valid]="myError.isValid('required', ['dirty', 'touched'])">
-  <input type="text" formControlName="username">
+  <input type="text" formControlName="username" />
 </div>
 
 <div ngxErrors="username" #myError="ngxErrors">
@@ -301,12 +302,13 @@ You can also use the "catch-all" selector to check if the control is valid, with
 
 ```html
 <div>
-  <div [ngClass]="{
+  <div
+    [ngClass]="{
     valid: myError.isValid('*'),
     validTouchedDirty: myError.isValid('*', ['touched', 'dirty'])
-  }">
-  </div>
-  <input type="text" formControlName="username">
+  }"
+  ></div>
+  <input type="text" formControlName="username" />
 </div>
 
 <div ngxErrors="username" #myError="ngxErrors">
@@ -324,7 +326,7 @@ The `hasErrors` property returns `true` if your control has any number of errors
 
 ```html
 <div [class.errors]="myError.hasErrors">
-  <input type="text" formControlName="username">
+  <input type="text" formControlName="username" />
 </div>
 
 <div ngxErrors="username" #myError="ngxErrors">
@@ -344,7 +346,7 @@ The `errors` property returns the object associated with any active errors. This
 > Example: Adds `Max length is 10, you typed (n)` when value is more than 10 characters (based on `Validators.maxLength(10)`).
 
 ```html
-<input type="text" formControlName="username">
+<input type="text" formControlName="username" />
 
 <div ngxErrors="username" #myError="ngxErrors">
   <div ngxError="minlength" when="dirty">...</div>
