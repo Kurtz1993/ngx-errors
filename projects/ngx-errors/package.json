@@ -1,6 +1,21 @@
 {
   "name": "@kurtz1993/ngx-errors",
   "version": "0.0.3",
+  "description": "A declarative validation module for reactive forms",
+  "author": "Luis Rogelio Hernández López",
+  "license": "MIT",
+  "keywords": [
+    "errors",
+    "ng-errors",
+    "ngx-errors",
+    "angular",
+    "reactive",
+    "rxjs"
+  ],
+  "repository": {
+    "url": "https://github.com/Kurtz1993/ngx-errors",
+    "type": "git"
+  },
   "peerDependencies": {
     "@angular/common": ">=6.0.0",
     "@angular/core": ">=6.0.0",
