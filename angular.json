@@ -124,6 +124,41 @@
           }
         }
       }
+    },
+    "ngx-errors": {
+      "projectType": "library",
+      "root": "projects/ngx-errors",
+      "sourceRoot": "projects/ngx-errors/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-errors/tsconfig.lib.json",
+            "project": "projects/ngx-errors/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-errors/src/test.ts",
+            "tsConfig": "projects/ngx-errors/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-errors/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-errors/tsconfig.lib.json",
+              "projects/ngx-errors/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "kurtz1993-ngxerrors"
 }

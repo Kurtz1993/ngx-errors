@@ -17,7 +17,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@kurtz1993/ngx-errors": [
+        "dist/ngx-errors"
+      ],
+      "@kurtz1993/ngx-errors/*": [
+        "dist/ngx-errors/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
