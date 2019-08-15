@@ -53,12 +53,10 @@ export class NgxErrorDirective implements OnInit, OnDestroy, DoCheck {
 
     const errors = this.ngxErrors.subject.pipe(
       filter(Boolean),
-      filter((obj: ErrorDetails) => !!~this.errorNames.indexOf(obj.errorName))
+      filter((obj: ErrorDetails) => this.errorNames.includes(obj.errorName))
     );
 
-    const states = this.states.pipe(
-      map(states => this.rules.every(rule => !!~states.indexOf(rule)))
-    );
+    const states = this.states.pipe(map(states => this.rules.every(rule => states.includes(rule))));
 
     this.subscription = combineLatest(states, errors).subscribe(([states, errors]) => {
       this.hidden = !(states && errors.control.hasError(errors.errorName));
