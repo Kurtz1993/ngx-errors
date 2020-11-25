@@ -1,6 +1,6 @@
 {
   "name": "@kurtz1993/ngx-errors",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A declarative validation module for reactive forms",
   "author": "Luis Rogelio Hernández López",
   "license": "MIT",
