@@ -7,19 +7,19 @@ import {
   Inject,
   HostBinding,
   forwardRef,
-} from '@angular/core';
+} from "@angular/core";
 
-import { Observable, Subject, Subscription, combineLatest } from 'rxjs';
-import { filter, map, distinctUntilChanged } from 'rxjs/operators';
+import { Observable, Subject, Subscription, combineLatest } from "rxjs";
+import { filter, map, distinctUntilChanged } from "rxjs/operators";
 
-import { NgxErrorsDirective } from './ngx-errors.directive';
+import { NgxErrorsDirective } from "./ngx-errors.directive";
 
-import { ErrorOptions, ErrorDetails } from '../public-api';
+import { ErrorOptions, ErrorDetails } from "../public-api";
 
-import { toArray } from './to-array';
+import { toArray } from "./to-array";
 
 @Directive({
-  selector: '[ngxError]',
+  selector: "[ngxError]",
 })
 export class NgxErrorDirective implements OnInit, OnDestroy, DoCheck {
   @Input() set ngxError(value: ErrorOptions) {
@@ -30,10 +30,10 @@ export class NgxErrorDirective implements OnInit, OnDestroy, DoCheck {
     this.rules = toArray(value);
   }
 
-  @HostBinding('hidden')
+  @HostBinding("hidden")
   hidden = true;
 
-  rules: string[] = [];
+  rules: string[] = ["dirty", "touched"];
 
   errorNames: string[] = [];
 
@@ -44,7 +44,8 @@ export class NgxErrorDirective implements OnInit, OnDestroy, DoCheck {
   states: Observable<string[]>;
 
   constructor(
-    @Inject(forwardRef(() => NgxErrorsDirective)) private ngxErrors: NgxErrorsDirective
+    @Inject(forwardRef(() => NgxErrorsDirective))
+    private ngxErrors: NgxErrorsDirective
   ) {}
 
   ngOnInit() {
@@ -56,15 +57,21 @@ export class NgxErrorDirective implements OnInit, OnDestroy, DoCheck {
       filter((obj: ErrorDetails) => this.errorNames.includes(obj.errorName))
     );
 
-    const states = this.states.pipe(map(states => this.rules.every(rule => states.includes(rule))));
+    const states = this.states.pipe(
+      map((states) => this.rules.every((rule) => states.includes(rule)))
+    );
 
-    this.subscription = combineLatest(states, errors).subscribe(([states, errors]) => {
-      this.hidden = !(states && errors.control.hasError(errors.errorName));
-    });
+    this.subscription = combineLatest(states, errors).subscribe(
+      ([states, errors]) => {
+        this.hidden = !(states && errors.control.hasError(errors.errorName));
+      }
+    );
   }
 
   ngDoCheck() {
-    this._states.next(this.rules.filter(rule => (this.ngxErrors.control as any)[rule]));
+    this._states.next(
+      this.rules.filter((rule) => (this.ngxErrors.control as any)[rule])
+    );
   }
 
   ngOnDestroy() {
